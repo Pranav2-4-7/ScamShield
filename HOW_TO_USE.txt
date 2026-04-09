@@ -1,0 +1,344 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║               SCAMSHIELD – HOW TO USE THIS APP                         ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+ScamShield is a privacy-first Android dialer that detects scam calls in
+real-time using on-device AI. Nothing is ever recorded or transmitted.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 1 – BUILDING & INSTALLING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PREREQUISITES
+─────────────
+• Android Studio Hedgehog (2023.1.1) or newer
+• JDK 17
+• Android SDK 34
+• Python 3.8+ (for model training only)
+• An Android device running Android 8.0+ (API 26+)
+
+STEP 1 – TRAIN THE ML MODEL (Optional but recommended)
+───────────────────────────────────────────────────────
+The app works immediately with rule-based detection.
+To add the TFLite neural network model:
+
+  1. Install Python dependencies:
+       pip install tensorflow scikit-learn pandas numpy
+
+  2. Run the training script from the project root:
+       python train_model.py
+
+  3. This produces two files:
+       scam_detection.tflite   (~200–500 KB)
+       vocab.txt               (~5 KB)
+
+  4. Copy both files to:
+       app/src/main/assets/
+
+  5. The app will automatically load the model on next build.
+
+STEP 2 – BUILD THE APK
+───────────────────────
+  1. Open the ScamShield folder in Android Studio
+  2. Wait for Gradle sync to complete (~2–5 minutes first time)
+  3. Connect your Android device via USB (enable USB debugging)
+  4. Click Run ▶ (or press Shift+F10)
+  5. The app installs and launches automatically
+
+  For a release APK:
+    Build → Generate Signed Bundle/APK → APK → release
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 2 – FIRST-TIME SETUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When you open ScamShield for the first time:
+
+STEP 1 – GRANT PERMISSIONS
+────────────────────────────
+Go to the STATUS tab and tap "Grant Permissions".
+
+Required permissions:
+  ✓ Phone (Read Phone State, Answer Calls, Make Calls)
+  ✓ Microphone – to capture speakerphone audio for analysis
+  ✓ Contacts – to identify known vs. unknown callers
+  ✓ Call Log – to check call history
+  ✓ Notifications – for real-time scam alerts
+
+All permissions are used ONLY during active calls. No background tracking.
+
+STEP 2 – SET AS DEFAULT DIALER
+────────────────────────────────
+⚠️  This step is REQUIRED for ScamShield to intercept calls.
+
+  1. Go to the STATUS tab
+  2. Tap "Set as Default" next to "Default Dialer"
+  3. Android will ask to confirm – tap "Set ScamShield"
+
+  Alternatively:
+    Settings → Apps → Default Apps → Phone App → ScamShield
+
+Without this, ScamShield cannot monitor incoming calls.
+
+STEP 3 – VERIFY SETUP
+──────────────────────
+On the STATUS tab, all four indicators should show green:
+  ✅ Default Dialer
+  ✅ Permissions
+  ✅ On-Device AI
+  ✅ Data Privacy
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 3 – USING THE APP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+── INCOMING CALLS ──────────────────────────────────────────
+
+When someone calls you:
+
+For a KNOWN contact (in your phonebook):
+  • Normal incoming call screen appears
+  • Green "Known Contact" badge shown
+  • No speakerphone activation
+  • No monitoring (your privacy is preserved)
+
+For an UNKNOWN number (not in phonebook):
+  • Incoming call screen appears with orange "Unknown Caller" badge
+  • You see a message: "ScamShield will monitor this call"
+  • Tap GREEN button (✓) to Answer
+  • Tap RED button (✗) to Decline
+
+── DURING A CALL WITH UNKNOWN CALLER ───────────────────────
+
+When you answer an unknown call, ScamShield automatically:
+
+  1. Switches call to SPEAKERPHONE
+     (required to capture both sides of conversation via mic)
+
+  2. Starts the real-time detection pipeline:
+     Mic → Speech-to-Text → AI Analysis
+
+  3. Shows the IN-CALL SCREEN with:
+     • Caller number at the top
+     • Call duration timer
+     • Risk gauge (green → yellow → orange → red)
+     • Real-time alert cards as patterns are detected
+
+RISK GAUGE COLORS:
+  🟢 GREEN  (0–39%)  – No scam patterns detected
+  🟡 YELLOW (40–64%) – Suspicious patterns, stay cautious
+  🟠 ORANGE (65–84%) – High risk, do NOT share any information
+  🔴 RED    (85%+)   – CRITICAL – Very likely a scam call
+
+ALERT CARDS appear instantly when patterns are detected:
+  • Pattern name (e.g., "OTP Request", "Bank Impersonation")
+  • Short excerpt showing what triggered the alert
+  • Severity level (Low / Medium / High / Critical)
+
+CALL CONTROLS:
+  🎤 Mute button    – Mute your microphone
+  📢 Speaker button – Toggle speakerphone on/off manually
+  📞 End Call (red) – Hang up
+
+LIVE TRANSCRIPT (optional):
+  • Tap "Show Live Transcript" to see the rolling transcription
+  • This is ephemeral and never saved anywhere
+  • Useful for debugging or confirming alerts
+
+── POST-CALL SUMMARY ───────────────────────────────────────
+
+After every monitored call ends, a SUMMARY screen appears showing:
+
+  • Overall risk level and score
+  • "All audio permanently discarded" confirmation
+  • List of all detected scam patterns with descriptions
+  • Alert timeline showing when each pattern was detected
+  • Safety advice for high-risk calls (what NOT to do)
+
+Tap DONE to dismiss. All data is cleared at this point.
+
+── MAKING OUTGOING CALLS ───────────────────────────────────
+
+Use the DIALPAD tab:
+  1. Type the number using the on-screen dialpad
+  2. Tap the GREEN phone button to call
+  3. Outgoing calls are NOT monitored by default
+
+You can also dial directly from Android's contact app –
+ScamShield handles the call as default dialer.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 4 – SETTINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Go to the SETTINGS tab to configure:
+
+AUTO SPEAKERPHONE (default: ON)
+  When ON: Unknown calls are automatically switched to speaker
+  When OFF: You must enable speaker manually for monitoring to work
+
+VIBRATION ALERTS (default: ON)
+  When ON: Phone vibrates when a HIGH or CRITICAL scam pattern is detected
+  Pattern: three short bursts — impossible to miss
+
+LIVE TRANSCRIPT DEBUG (default: OFF)
+  Shows real-time transcription in the in-call screen
+  Useful for developers; not needed for normal use
+
+DETECTION SENSITIVITY (default: Medium)
+  LOW  – Only alert on very clear, multiple scam signals
+  MED  – Balanced (recommended)
+  HIGH – Alert on even early or partial scam indicators
+         (may produce more false positives)
+
+PRIVACY GUARANTEE (always active, cannot be disabled):
+  "ScamShield processes all audio on-device only.
+   No recordings are made. No data is transmitted."
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 5 – SCAM PATTERNS DETECTED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ScamShield detects these 10 common scam patterns:
+
+1. OTP REQUEST
+   Triggered by: "share the OTP", "verification code", "enter the PIN"
+   Real scam: Legitimate banks NEVER ask for OTPs over the phone.
+
+2. BANK IMPERSONATION
+   Triggered by: Caller claiming to be from SBI/HDFC/ICICI, KYC threats,
+   account blocked/frozen, suspicious transaction alerts
+   Real scam: Call your bank directly using the number on their website.
+
+3. GOVERNMENT IMPERSONATION
+   Triggered by: "I am from CBI", "digital arrest", TRAI, narcotics, income
+   tax threats, Aadhaar misuse claims
+   Real scam: No government agency demands immediate payment over phone.
+
+4. URGENCY / FEAR TACTICS
+   Triggered by: "act now", "within 24 hours", "do not disconnect",
+   "do not tell anyone", "last chance"
+   Real scam: Artificial urgency is a manipulation technique. Take your time.
+
+5. PRIZE / LOTTERY SCAM
+   Triggered by: KBC, lucky draw, "you won", lottery winner
+   Real scam: You cannot win a lottery you never entered.
+
+6. TECH SUPPORT SCAM
+   Triggered by: AnyDesk, TeamViewer, Microsoft/Apple caller, "your device
+   has virus", remote access requests
+   Real scam: Microsoft and Apple do NOT call you out of the blue.
+
+7. REFUND SCAM
+   Triggered by: "excess amount charged", "refund pending", cashback
+   requiring your bank details or OTP
+   Real scam: Refunds never require you to share your credentials.
+
+8. PERSONAL INFO REQUEST
+   Triggered by: Requests for Aadhaar number, PAN, CVV, ATM PIN,
+   date of birth, mother's maiden name
+   Real scam: No legitimate caller needs your PIN or CVV.
+
+9. KYC SCAM
+   Triggered by: "KYC update pending", "account will close today",
+   video KYC requests
+   Real scam: KYC is done in-person or via the bank's official app.
+
+10. REMOTE ACCESS REQUEST
+    Triggered by: "install this app", "share your screen", AnyDesk/TeamViewer
+    Real scam: Never give anyone remote access to your phone.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 6 – TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROBLEM: ScamShield doesn't appear when a call comes in
+SOLUTION: Make sure ScamShield is set as Default Dialer (see Part 2)
+
+PROBLEM: Speakerphone doesn't turn on automatically
+SOLUTION: Check that "Auto Speakerphone" is ON in Settings.
+          Some devices restrict this in battery saver mode.
+
+PROBLEM: No alerts even for obvious scam phrases
+SOLUTION: 
+  1. Ensure microphone permission is granted
+  2. Check that speakerphone is active (caller must be audible)
+  3. Speak clearly; very noisy environments may reduce accuracy
+  4. Try increasing sensitivity in Settings
+  5. Run train_model.py and add the TFLite model to assets
+
+PROBLEM: Too many false alerts
+SOLUTION: Lower sensitivity in Settings → Detection Sensitivity
+
+PROBLEM: Build fails with "TFLite not found"
+SOLUTION: Make sure scam_detection.tflite is in app/src/main/assets/
+          If not trained yet, rule-based detection still works.
+          The app handles missing model gracefully.
+
+PROBLEM: "Speech recognition not available"
+SOLUTION: The device needs Google speech recognition service installed.
+          Go to Play Store → search "Google" → install "Speech Recognition
+          & Synthesis". Works offline after initial download.
+
+PROBLEM: App crashes on call answer
+SOLUTION: Grant ANSWER_PHONE_CALLS permission manually:
+          Settings → Apps → ScamShield → Permissions → Phone → Allow
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 7 – PRIVACY FAQ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Is my voice recorded?
+A: No. Audio is processed in 500ms chunks and discarded immediately.
+   Nothing is written to storage.
+
+Q: Are my call logs stored?
+A: No. ScamShield does NOT write any call logs. It reads your contacts
+   only to distinguish known from unknown callers.
+
+Q: Does it send data to a server?
+A: No. There are zero network calls. The manifest has no INTERNET permission.
+   All AI runs on your device.
+
+Q: Does it work without internet?
+A: Yes. 100% offline. The speech recognition uses Android's on-device engine.
+
+Q: What happens to the transcript after a call?
+A: It is cleared from memory by PhoneStateHolder.clearAll() the moment
+   the call disconnects.
+
+Q: Can I use ScamShield for known contacts?
+A: Known contacts (people in your phonebook) are NOT monitored. This is
+   intentional to preserve your privacy with trusted callers.
+
+Q: Will it drain my battery?
+A: ScamShield only activates during active calls from unknown numbers.
+   It has no background monitoring. Battery impact is minimal.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PART 8 – REPORTING A REAL SCAM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If ScamShield detects a scam and you believe the call was fraudulent:
+
+India:
+  • National Cyber Crime Helpline: 1930
+  • Website: https://cybercrime.gov.in
+  • File FIR at your nearest police station
+
+For banking fraud:
+  • Contact your bank immediately on their official number
+  • Block your cards if you shared any financial details
+  • RBI Ombudsman: https://cms.rbi.org.in
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ScamShield – Protect yourself. Trust no one on the phone.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

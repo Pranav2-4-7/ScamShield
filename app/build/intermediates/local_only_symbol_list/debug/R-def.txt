@@ -1,0 +1,30 @@
+R_DEF: Internal format may change without notice
+local
+color colorOnPrimary
+color colorPrimary
+color colorPrimaryVariant
+color colorSecondary
+color ic_launcher_background
+color risk_critical
+color risk_high
+color risk_low
+color risk_medium
+drawable ic_launcher_foreground
+drawable ic_shield
+drawable ic_shield_alert
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_description
+string app_name
+string channel_name
+string known_contact
+string notification_monitoring
+string privacy_notice
+string risk_critical
+string risk_high
+string risk_low
+string risk_medium
+string unknown_caller
+style Theme.ScamShield
+xml backup_rules
+xml data_extraction_rules

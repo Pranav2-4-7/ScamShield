@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScamShield</string>
+    <string name="app_description">Privacy-first scam call detector</string>
+    <string name="channel_name">ScamShield Protection</string>
+    <string name="notification_monitoring">Monitoring call for scam patterns…</string>
+    <string name="unknown_caller">Unknown Caller</string>
+    <string name="known_contact">Known Contact</string>
+    <string name="risk_low">Low Risk</string>
+    <string name="risk_medium">Medium Risk</string>
+    <string name="risk_high">High Risk</string>
+    <string name="risk_critical">CRITICAL – Likely Scam</string>
+    <string name="privacy_notice">All audio is processed on-device and immediately discarded. Nothing is stored or transmitted.</string>
+</resources>

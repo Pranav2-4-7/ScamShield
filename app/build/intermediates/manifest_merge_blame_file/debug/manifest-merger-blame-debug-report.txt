@@ -1,0 +1,383 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.scamshield.debug"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- ── Permissions ── -->
+12    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+12-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:6:5-75
+12-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:6:22-72
+13    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+13-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:7:5-72
+13-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:7:22-69
+14    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+14-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:8:5-75
+14-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:8:22-72
+15    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+15-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:9:5-71
+15-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:9:22-68
+16    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+16-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:10:5-80
+16-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:10:22-77
+17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+17-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:11:5-77
+17-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:11:22-74
+18    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+18-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:12:5-88
+18-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:12:22-85
+19    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_PHONE_CALL" />
+19-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:13:5-88
+19-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:13:22-85
+20    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+20-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:14:5-81
+20-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:14:22-78
+21    <uses-permission android:name="android.permission.VIBRATE" />
+21-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:15:5-66
+21-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:15:22-63
+22    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+22-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:16:5-81
+22-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:16:22-78
+23    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+23-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:17:5-77
+23-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:17:22-74
+24    <uses-permission android:name="android.permission.CALL_PHONE" />
+24-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:18:5-69
+24-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:18:22-66
+25    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+25-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:19:5-77
+25-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:19:22-74
+26    <uses-permission android:name="android.permission.READ_CONTACTS" />
+26-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:20:5-72
+26-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:20:22-69
+27
+28    <uses-feature
+28-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:22:5-24:35
+29        android:name="android.hardware.microphone"
+29-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:23:9-51
+30        android:required="true" />
+30-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:24:9-32
+31    <uses-feature
+31-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:25:5-27:35
+32        android:name="android.hardware.telephony"
+32-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:26:9-50
+33        android:required="true" />
+33-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:27:9-32
+34
+35    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+35-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:22:5-76
+35-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:22:22-73
+36
+37    <permission
+37-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+38        android:name="com.scamshield.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+38-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+39        android:protectionLevel="signature" />
+39-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+40
+41    <uses-permission android:name="com.scamshield.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+41-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+41-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+42    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+43    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+44
+45    <application
+45-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:29:5-122:19
+46        android:allowBackup="false"
+46-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:30:9-36
+47        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+47-->[androidx.core:core:1.13.1] C:\Users\Admin\.gradle\caches\transforms-3\f233b25de31105d1bc88d01bc493ccc3\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+48        android:dataExtractionRules="@xml/data_extraction_rules"
+48-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:31:9-65
+49        android:debuggable="true"
+50        android:extractNativeLibs="false"
+51        android:fullBackupContent="@xml/backup_rules"
+51-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:32:9-54
+52        android:icon="@mipmap/ic_launcher"
+52-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:33:9-43
+53        android:label="@string/app_name"
+53-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:34:9-41
+54        android:roundIcon="@mipmap/ic_launcher_round"
+54-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:35:9-54
+55        android:supportsRtl="true"
+55-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:36:9-35
+56        android:testOnly="true"
+57        android:theme="@style/Theme.ScamShield" >
+57-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:37:9-48
+58
+59        <!-- ── Main Entry Activity ── -->
+60        <activity
+60-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:41:9-67:20
+61            android:name="com.scamshield.ui.screens.MainActivity"
+61-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:42:13-52
+62            android:exported="true"
+62-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:43:13-36
+63            android:launchMode="singleTop"
+63-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:44:13-43
+64            android:showOnLockScreen="true"
+64-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:45:13-44
+65            android:turnScreenOn="true" >
+65-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:46:13-40
+66            <intent-filter>
+66-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:47:13-50:29
+67                <action android:name="android.intent.action.MAIN" />
+67-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:48:17-69
+67-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:48:25-66
+68
+69                <category android:name="android.intent.category.LAUNCHER" />
+69-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:49:17-77
+69-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:49:27-74
+70            </intent-filter>
+71            <intent-filter>
+71-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:51:13-56:29
+72                <action android:name="android.intent.action.DIAL" />
+72-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:52:17-69
+72-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:52:25-66
+73
+74                <category android:name="android.intent.category.DEFAULT" />
+74-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:17-76
+74-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:27-73
+75                <category android:name="android.intent.category.BROWSABLE" />
+75-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:54:17-78
+75-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:54:27-75
+76
+77                <data android:scheme="tel" />
+77-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:55:17-46
+77-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:55:23-43
+78            </intent-filter>
+79            <intent-filter>
+79-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:57:13-60:29
+80                <action android:name="android.intent.action.DIAL" />
+80-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:52:17-69
+80-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:52:25-66
+81
+82                <category android:name="android.intent.category.DEFAULT" />
+82-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:17-76
+82-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:27-73
+83            </intent-filter>
+84            <intent-filter>
+84-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:61:13-66:29
+85                <action android:name="android.intent.action.VIEW" />
+85-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:62:17-69
+85-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:62:25-66
+86
+87                <category android:name="android.intent.category.DEFAULT" />
+87-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:17-76
+87-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:53:27-73
+88                <category android:name="android.intent.category.BROWSABLE" />
+88-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:54:17-78
+88-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:54:27-75
+89
+90                <data android:scheme="tel" />
+90-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:55:17-46
+90-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:55:23-43
+91            </intent-filter>
+92        </activity>
+93
+94        <!-- ── Incoming Call Alert Activity ── -->
+95        <activity
+95-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:70:9-76:49
+96            android:name="com.scamshield.ui.screens.IncomingCallActivity"
+96-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:71:13-60
+97            android:excludeFromRecents="true"
+97-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:76:13-46
+98            android:exported="false"
+98-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:72:13-37
+99            android:launchMode="singleTop"
+99-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:73:13-43
+100            android:showOnLockScreen="true"
+100-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:74:13-44
+101            android:turnScreenOn="true" />
+101-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:75:13-40
+102
+103        <!-- ── In-Call Screen Activity ── -->
+104        <activity
+104-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:79:9-84:43
+105            android:name="com.scamshield.ui.screens.InCallActivity"
+105-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:80:13-54
+106            android:exported="false"
+106-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:81:13-37
+107            android:launchMode="singleTop"
+107-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:82:13-43
+108            android:showOnLockScreen="true"
+108-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:83:13-44
+109            android:turnScreenOn="true" />
+109-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:84:13-40
+110
+111        <!-- ── Post-Call Summary Activity ── -->
+112        <activity
+112-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:87:9-90:46
+113            android:name="com.scamshield.ui.screens.PostCallActivity"
+113-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:88:13-56
+114            android:exported="false"
+114-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:89:13-37
+115            android:launchMode="singleTop" />
+115-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:90:13-43
+116
+117        <!-- ── InCallService (Custom Dialer Core) ── -->
+118        <service
+118-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:93:9-104:19
+119            android:name="com.scamshield.telecom.ScamShieldInCallService"
+119-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:94:13-60
+120            android:exported="true"
+120-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:95:13-36
+121            android:foregroundServiceType="phoneCall|microphone"
+121-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:97:13-65
+122            android:permission="android.permission.BIND_INCALL_SERVICE" >
+122-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:96:13-72
+123            <intent-filter>
+123-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:98:13-100:29
+124                <action android:name="android.telecom.InCallService" />
+124-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:99:17-72
+124-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:99:25-69
+125            </intent-filter>
+126
+127            <meta-data
+127-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:101:13-103:40
+128                android:name="android.telecom"
+128-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:102:17-47
+129                android:value="true" />
+129-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:103:17-37
+130        </service>
+131
+132        <!-- ── Scam Detection Foreground Service ── -->
+133        <service
+133-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:107:9-110:68
+134            android:name="com.scamshield.service.ScamDetectionService"
+134-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:108:13-57
+135            android:exported="false"
+135-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:109:13-37
+136            android:foregroundServiceType="phoneCall|microphone" />
+136-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:110:13-65
+137
+138        <!-- ── Phone Account Connection Service ── -->
+139        <service
+139-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:113:9-120:19
+140            android:name="com.scamshield.telecom.ScamShieldConnectionService"
+140-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:114:13-64
+141            android:exported="true"
+141-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:115:13-36
+142            android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE" >
+142-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:116:13-84
+143            <intent-filter>
+143-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:117:13-119:29
+144                <action android:name="android.telecom.ConnectionService" />
+144-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:118:17-76
+144-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:118:25-73
+145            </intent-filter>
+146        </service>
+147
+148        <activity
+148-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\a473228c06c457f76db39aa3b16d3cd9\transformed\jetified-ui-tooling-release\AndroidManifest.xml:23:9-25:39
+149            android:name="androidx.compose.ui.tooling.PreviewActivity"
+149-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\a473228c06c457f76db39aa3b16d3cd9\transformed\jetified-ui-tooling-release\AndroidManifest.xml:24:13-71
+150            android:exported="true" />
+150-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\a473228c06c457f76db39aa3b16d3cd9\transformed\jetified-ui-tooling-release\AndroidManifest.xml:25:13-36
+151        <activity
+151-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\320cc2b690b173721d1ba50bee15132d\transformed\jetified-ui-test-manifest-1.6.0\AndroidManifest.xml:23:9-25:39
+152            android:name="androidx.activity.ComponentActivity"
+152-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\320cc2b690b173721d1ba50bee15132d\transformed\jetified-ui-test-manifest-1.6.0\AndroidManifest.xml:24:13-63
+153            android:exported="true" /> <!-- MuteStateReceiver is needed on sdk 33 and lower to echo global mute state changes -->
+153-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Admin\.gradle\caches\transforms-3\320cc2b690b173721d1ba50bee15132d\transformed\jetified-ui-test-manifest-1.6.0\AndroidManifest.xml:25:13-36
+154        <receiver
+154-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:33:9-39:20
+155            android:name="androidx.core.telecom.internal.MuteStateReceiver"
+155-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:34:13-76
+156            android:exported="true" >
+156-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:35:13-36
+157            <intent-filter>
+157-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:36:13-38:29
+158                <action android:name="android.media.action.MICROPHONE_MUTE_CHANGED" />
+158-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:37:17-87
+158-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:37:25-84
+159            </intent-filter>
+160        </receiver>
+161
+162        <service
+162-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:41:9-48:19
+163            android:name="androidx.core.telecom.internal.JetpackConnectionService"
+163-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:42:13-83
+164            android:exported="true"
+164-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:43:13-36
+165            android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE" >
+165-->[androidx.core:core-telecom:1.0.0-beta01] C:\Users\Admin\.gradle\caches\transforms-3\94dd31cf4ff3447475195fb3f981cf25\transformed\jetified-core-telecom-1.0.0-beta01\AndroidManifest.xml:44:13-84
+166            <intent-filter>
+166-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:117:13-119:29
+167                <action android:name="android.telecom.ConnectionService" />
+167-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:118:17-76
+167-->C:\Users\Admin\Downloads\ScamShield\app\src\main\AndroidManifest.xml:118:25-73
+168            </intent-filter>
+169        </service>
+170
+171        <provider
+171-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+172            android:name="androidx.startup.InitializationProvider"
+172-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:25:13-67
+173            android:authorities="com.scamshield.debug.androidx-startup"
+173-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:26:13-68
+174            android:exported="false" >
+174-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:27:13-37
+175            <meta-data
+175-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+176                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+176-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:30:17-75
+177                android:value="androidx.startup" />
+177-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\c57d1d8dd1e20170a9e148a41f1dbbf7\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:31:17-49
+178            <meta-data
+178-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\Admin\.gradle\caches\transforms-3\435c9c13ebb2122a76df160606cbb964\transformed\jetified-lifecycle-process-2.8.1\AndroidManifest.xml:29:13-31:52
+179                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+179-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\Admin\.gradle\caches\transforms-3\435c9c13ebb2122a76df160606cbb964\transformed\jetified-lifecycle-process-2.8.1\AndroidManifest.xml:30:17-78
+180                android:value="androidx.startup" />
+180-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\Admin\.gradle\caches\transforms-3\435c9c13ebb2122a76df160606cbb964\transformed\jetified-lifecycle-process-2.8.1\AndroidManifest.xml:31:17-49
+181            <meta-data
+181-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+182                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+182-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+183                android:value="androidx.startup" />
+183-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+184        </provider>
+185
+186        <receiver
+186-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+187            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+187-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+188            android:directBootAware="false"
+188-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+189            android:enabled="true"
+189-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+190            android:exported="true"
+190-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+191            android:permission="android.permission.DUMP" >
+191-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+192            <intent-filter>
+192-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+193                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+193-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+193-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+194            </intent-filter>
+195            <intent-filter>
+195-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+196                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+196-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+196-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+197            </intent-filter>
+198            <intent-filter>
+198-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+199                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+199-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+199-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+200            </intent-filter>
+201            <intent-filter>
+201-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+202                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+202-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+202-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Admin\.gradle\caches\transforms-3\04e928051a2259a81d9501e58296b70c\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+203            </intent-filter>
+204        </receiver>
+205    </application>
+206
+207</manifest>

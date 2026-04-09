@@ -1,0 +1,11 @@
+// Top-level build file
+plugins {
+    id 'com.android.application' version '8.2.2' apply false
+    id 'com.android.library' version '8.2.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.22' apply false
+}
+
+ext {
+    kotlin_version = '1.9.22'
+    compose_version = '1.5.4' // Matched with Kotlin 1.9.22
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FF1565C0</color>
+    <color name="colorPrimary">#FF1565C0</color>
+    <color name="colorPrimaryVariant">#FF003C8F</color>
+    <color name="colorSecondary">#FF2E7D32</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+    <color name="risk_low">#FF2E7D32</color>
+    <color name="risk_medium">#FFE65100</color>
+    <color name="risk_high">#FFD32F2F</color>
+    <color name="risk_critical">#FFB71C1C</color>
+</resources>

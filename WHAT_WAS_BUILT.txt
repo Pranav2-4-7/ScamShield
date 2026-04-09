@@ -1,0 +1,208 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                     SCAMSHIELD - WHAT WAS BUILT                        ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+PROJECT: ScamShield – Privacy-First Android Scam Call Detector
+VERSION: 1.0.0
+PLATFORM: Android (minSdk 26 / Android 8.0+)
+LANGUAGE: Kotlin + Jetpack Compose
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SYSTEM ARCHITECTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Incoming Call
+    │
+    ▼
+ScamShieldInCallService (Android InCallService)
+    │── ContactsHelper ──► Unknown Caller?
+    │                          │ YES
+    │                          ▼
+    │                   Auto-Enable Speakerphone
+    │                          │
+    │                          ▼
+    │                   ScamDetectionService (Foreground)
+    │                          │
+    │           ┌──────────────┼──────────────────┐
+    │           ▼              ▼                  ▼
+    │     AudioCapture   SpeechToText        SlidingWindow
+    │     (Mic → PCM)    (On-device STT)     (Rolling buffer)
+    │           │              │                  │
+    │           └──────────────┴──────────────────┘
+    │                          │
+    │                          ▼
+    │                  ScamDetectionEngine
+    │                  ├── TFLite ML Model
+    │                  └── Rule-Based Patterns (10 categories)
+    │                          │
+    │                          ▼
+    │                  PhoneStateHolder (ephemeral)
+    │                          │
+    │           ┌──────────────┼──────────────────┐
+    │           ▼              ▼                  ▼
+    │      Real-time      Vibration           Notification
+    │      UI Alerts      Feedback            Alerts
+    │
+    ▼
+Call Ends → PostCallActivity (risk summary) → clearAll() → ZERO DATA
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILES CREATED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BUILD & CONFIG
+──────────────
+build.gradle (root)          – Project-level Gradle config
+app/build.gradle             – TFLite, Compose, Telecom dependencies
+settings.gradle              – Module settings
+gradle.properties            – JVM args, AndroidX flags
+app/proguard-rules.pro       – TFLite + Telecom keep rules
+
+MANIFEST
+────────
+AndroidManifest.xml          – All permissions, service/activity declarations
+                               Permissions: RECORD_AUDIO, READ_PHONE_STATE,
+                               MANAGE_OWN_CALLS, ANSWER_PHONE_CALLS, READ_CONTACTS,
+                               FOREGROUND_SERVICE_MICROPHONE, POST_NOTIFICATIONS
+
+TELECOM LAYER
+─────────────
+telecom/ScamShieldInCallService.kt    – Custom dialer core
+                                         • Receives all incoming/outgoing calls
+                                         • Detects unknown callers via ContactsHelper
+                                         • Auto-switches to speakerphone for unknowns
+                                         • Starts/stops ScamDetectionService
+telecom/ScamCallCallback.kt           – Handles call state transitions (ringing →
+                                         active → disconnected)
+telecom/ScamShieldConnectionService.kt – ConnectionService for dialer registration
+telecom/ScamShieldConnection.kt        – Individual call connection implementation
+
+AUDIO PIPELINE
+──────────────
+audio/AudioCaptureManager.kt    – Mic-based PCM audio capture
+                                   • AudioSource.VOICE_RECOGNITION (noise-optimised)
+                                   • 16 kHz mono, 16-bit PCM
+                                   • 500ms streaming chunks
+                                   • Noise gate + amplitude normalisation
+                                   • Ephemeral: buffer overwritten each iteration
+
+audio/SpeechToTextEngine.kt     – On-device speech recognition
+                                   • Android SpeechRecognizer API
+                                   • Prefers offline mode (EXTRA_PREFER_OFFLINE)
+                                   • en-IN locale (handles Indian English accents)
+                                   • Continuous mode with auto-restart on errors
+                                   • Partial results for low-latency detection
+
+audio/SlidingWindowBuffer.kt    – Rolling transcript context window
+                                   • Max 150 words / 30 segments
+                                   • Oldest context auto-evicted
+                                   • Provides context to ML without storing full log
+
+ML DETECTION
+────────────
+ml/ScamDetectionEngine.kt       – Dual-mode scam detection engine
+                                   • PRIMARY: TFLite Bidirectional LSTM model
+                                     (loads from assets/scam_detection.tflite)
+                                   • FALLBACK: Rule-based regex engine (10 patterns)
+                                   • Neural Network API (NNAPI) hardware acceleration
+                                   • Combined scoring: max(ML_score, rule_score)
+                                   • Risk levels: Low/Medium/High/Critical
+
+SCAM PATTERNS DETECTED (10 categories):
+  1. OTP_REQUEST             – OTP, verification code, PIN requests
+  2. BANK_IMPERSONATION      – SBI/HDFC/ICICI/AXIS impersonation, KYC threats
+  3. GOVERNMENT_IMPERSONATION – CBI, digital arrest, TRAI, narcotics, income tax
+  4. URGENCY_TACTIC          – "act now", "within 24 hours", "don't disconnect"
+  5. PRIZE_SCAM              – KBC, lottery, lucky draw
+  6. TECH_SUPPORT            – AnyDesk, TeamViewer, Microsoft/Apple impersonation
+  7. REFUND_SCAM             – Fake refund requiring bank details
+  8. PERSONAL_INFO_REQUEST   – Aadhaar, PAN, CVV, passwords
+  9. KYC_SCAM                – KYC expiry threats, video KYC scams
+  10. REMOTE_ACCESS          – Install apps, screen share requests
+
+SERVICES
+────────
+service/ScamDetectionService.kt  – Foreground orchestration service
+                                    • Starts with ACTION_START on call answer
+                                    • Runs pipeline: Audio → STT → Window → ML
+                                    • Emits risk scores and alerts via StateFlow
+                                    • Triggers vibration on HIGH/CRITICAL alerts
+                                    • Updates persistent notification with risk level
+                                    • Stops with ACTION_STOP on call end
+                                    • Clears all buffers after stopping
+
+UTILITIES
+─────────
+utils/PhoneStateHolder.kt   – Ephemeral in-memory state (Kotlin object)
+                               • StateFlow streams for UI reactivity
+                               • clearAll() called on every call end
+                               • NEVER persisted to disk
+
+utils/ContactsHelper.kt     – ContactsContract lookup for known/unknown check
+
+UI SCREENS
+──────────
+ui/screens/MainActivity.kt         – Entry point, dialpad, permission/dialer setup
+ui/screens/IncomingCallActivity.kt  – Incoming call screen with unknown caller badge
+ui/screens/InCallActivity.kt        – Live call screen with real-time risk gauge,
+                                      alert cards, mute/speaker controls
+ui/screens/PostCallActivity.kt      – Post-call risk summary with pattern list,
+                                      alert timeline, and safety advice
+ui/screens/MainScreen.kt            – Compose UI: dialpad, status, settings tabs
+ui/viewmodel/MainViewModel.kt       – ViewModel for main screen state
+ui/theme/ScamShieldTheme.kt         – Material 3 theme
+
+RESOURCES
+─────────
+res/values/strings.xml         – App strings
+res/values/colors.xml          – Risk level colors
+res/values/themes.xml          – Material3 NoActionBar theme
+res/xml/backup_rules.xml       – Excludes ALL data from backup (privacy)
+res/xml/data_extraction_rules.xml – Blocks cloud/device transfer of any data
+res/drawable/ic_shield.xml         – Shield checkmark icon
+res/drawable/ic_shield_alert.xml   – Shield alert icon
+res/drawable/ic_launcher_foreground.xml – App launcher icon
+
+ASSETS
+──────
+assets/vocab.txt               – Vocabulary for TFLite tokeniser (starter)
+                                  Replace with output of train_model.py
+
+ML MODEL TRAINING
+─────────────────
+train_model.py                 – Python training script
+                                  • Bidirectional LSTM architecture
+                                  • 70+ labelled training examples (scam + legit)
+                                  • Dynamic quantisation → float16 TFLite export
+                                  • Outputs: scam_detection.tflite + vocab.txt
+                                  • Copy both to app/src/main/assets/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRIVACY DESIGN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• No audio is recorded. PCM buffers are overwritten after each 500ms chunk.
+• No transcripts are stored. SlidingWindowBuffer is in-memory only.
+• No call logs written by ScamShield.
+• No network calls. All ML inference runs on-device.
+• No cloud APIs. SpeechRecognizer uses EXTRA_PREFER_OFFLINE.
+• Backup excluded via backup_rules.xml and data_extraction_rules.xml.
+• PhoneStateHolder.clearAll() called on every call end.
+• PostCallActivity snapshots summary before clearAll(), then displays it
+  ephemerally in UI only (never written to disk).
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DEPENDENCIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+tensorflow-lite:2.14.0          – On-device ML inference
+tensorflow-lite-support:0.4.4   – Model loading utilities
+tensorflow-lite-task-text:0.4.4 – NLP task helpers
+androidx.compose BOM 2023.10    – Jetpack Compose UI
+core-telecom:1.0.0-beta01       – Telecom/InCallService APIs
+accompanist-permissions:0.32.0  – Runtime permission helpers
+lifecycle-service:2.7.0         – Lifecycle-aware services
+kotlinx-coroutines-android:1.7.3 – Async pipeline
