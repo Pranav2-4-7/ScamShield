@@ -1,0 +1,34 @@
+workflows:
+  android-debug-build:
+    name: ScamShield Debug APK
+    max_build_duration: 60
+
+    environment:
+      java: 17
+
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+
+      - name: Install Gradle wrapper
+        script: |
+          cd "$CM_BUILD_DIR"
+          gradle wrapper --gradle-version 8.2
+          chmod +x gradlew
+
+      - name: Build debug APK
+        script: |
+          cd "$CM_BUILD_DIR"
+          ./gradlew assembleDebug --stacktrace
+
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
+
+    publishing:
+      email:
+        recipients:
+          - your@email.com
+        notify:
+          success: true
+          failure: true
